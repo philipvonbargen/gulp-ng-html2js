@@ -1,6 +1,6 @@
 # lingon-ng-html2js [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Dependency Status][depstat-image]][depstat-url]
 
-> A plugin for [gulp](https://github.com/wearefractal/gulp) which generates AngularJS modules, which pre-load your HTML
+> A plugin for [Lingon](https://github.com/jpettersson/lingon) which generates AngularJS modules, which pre-load your HTML
 code into the [$templateCache](http://docs.angularjs.org/api/ng.$templateCache). This way AngularJS doesn't need to
 request the actual HTML files anymore.
 
@@ -18,14 +18,11 @@ Then, add it to your `lingon.js`:
 var ngHtml2Js = require("lingon-ng-html2js");
 
 lingon.preProcessor('html').add(function(params) {
-  return ngHtml2js();
+  return ngHtml2js({
+    moduleName: 'templates',
+    base: 'source'
+  });
 });
-gulp.src("./partials/*.html")
-	.pipe(ngHtml2Js({
-		moduleName: "MyAwesomePartials",
-		prefix: "/partials"
-	}))
-	.pipe(gulp.dest("./dist/partials"));
 ```
 
 The main reason to use this module would be optimization. By pre-loading the HTML files, you can spare requests and
