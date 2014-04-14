@@ -19,7 +19,7 @@ angular.module('example.html', []).run(['$templateCache', function($templateCach
     '		</style>\n' +
     '		<script type="text/javascript">\n' +
     '			function someInlineScript(){\n' +
-    '				alert("This is some \'inline script")\n' +
+    '				alert(\'This is some "inline script\\\'\');\n' +
     '			}\n' +
     '		</script>\n' +
     '	</head>\n' +

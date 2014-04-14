@@ -1,32 +1,33 @@
 {
-  "name": "gulp-ng-html2js",
+  "name": "lingon-ng-html2js",
   "version": "0.1.5",
-  "description": "A Gulp plugin which generates AngularJS modules, which pre-load your HTML code into the $templateCache. This way AngularJS doesn't need to request the actual HTML files anymore.",
+  "description": "A Lingon plugin which generates AngularJS modules, which pre-load your HTML code into the $templateCache. This way AngularJS doesn't need to request the actual HTML files anymore.",
   "keywords": [
-    "gulpplugin",
-	"ng-html2js",
-	"angular",
-	"html2js",
-	"angularjs"
+    "lingon",
+    "lingonplugin",
+    "ng-html2js",
+    "angular",
+    "html2js",
+    "angularjs"
   ],
-  "homepage": "https://github.com/marklagendijk/gulp-ng-html2js",
-  "bugs": "https://github.com/marklagendijk/gulp-ng-html2js/issues",
+  "homepage": "https://github.com/philipvonbargen/lingon-ng-html2js",
+  "bugs": "https://github.com/philipvonbargen/lingon-ng-html2js/issues",
   "author": {
-    "name": "Mark Lagendijk",
-	"email": "mark@lagendijk.info",
-    "url": "https://github.com/marklagendijk"
+    "name": "Philip von Bargen",
+    "email": "philip@philipvonbargen.de",
+    "url": "https://github.com/philipvonbargen"
   },
   "main": "./index.js",
   "repository": {
     "type": "git",
-    "url": "git://github.com/marklagendijk/gulp-ng-html2js.git"
+    "url": "git://github.com/philipvonbargen/lingon-ng-html2js.git"
   },
   "scripts": {
     "test": "mocha"
   },
   "dependencies": {
-    "gulp-util": "~2.1.4",
-	"map-stream": "*"
+    "gulp-util": "~2.2.4",
+    "map-stream": "~0.1.0"
   },
   "devDependencies": {
     "mocha": "~1.14.0",

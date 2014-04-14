@@ -4,4 +4,4 @@ node_js:
   - '0.10'
 before_install:
   - currentfolder=${PWD##*/}
-  - if [ "$currentfolder" != 'generator-gulp-plugin' ]; then cd .. && eval "mv $currentfolder generator-gulp-plugin" && cd generator-gulp-plugin; fi
+  - if [ "$currentfolder" != 'generator-lingon-plugin' ]; then cd .. && eval "mv $currentfolder generator-lingon-plugin" && cd generator-lingon-plugin; fi

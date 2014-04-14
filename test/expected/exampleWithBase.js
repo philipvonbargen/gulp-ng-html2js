@@ -19,7 +19,7 @@ angular.module('../test/fixtures/example.html', []).run(['$templateCache', funct
     '		</style>\n' +
     '		<script type="text/javascript">\n' +
     '			function someInlineScript(){\n' +
-    '				alert("This is some \'inline script")\n' +
+    '				alert(\'This is some "inline script\\\'\');\n' +
     '			}\n' +
     '		</script>\n' +
     '	</head>\n' +

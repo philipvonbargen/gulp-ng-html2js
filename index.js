@@ -1,22 +1,22 @@
-var util = require("util");
-var path = require("path");
-var gutil = require("gulp-util");
-var map = require("map-stream");
+var util = require('util');
+var path = require('path');
+var gutil = require('gulp-util');
+var map = require('map-stream');
 
-var TEMPLATE = "angular.module(\'%s\', []).run([\'$templateCache\', function($templateCache) {\n" +
-	"  $templateCache.put(\'%s\',\n    \'%s\');\n" +
-	"}]);\n";
+var TEMPLATE = 'angular.module(\'%s\', []).run([\'$templateCache\', function($templateCache) {\n' +
+	'  $templateCache.put(\'%s\',\n    \'%s\');\n' +
+	'}]);\n';
 
-var SINGLE_MODULE_TPL = "(function(module) {\n" +
-	"try {\n" +
-	"  module = angular.module(\'%s\');\n" +
-	"} catch (e) {\n" +
-	"  module = angular.module(\'%s\', []);\n" +
-	"}\n" +
-	"module.run([\'$templateCache\', function($templateCache) {\n" +
-	"  $templateCache.put(\'%s\',\n    \'%s\');\n" +
-	"}]);\n" +
-	"})();\n";
+var SINGLE_MODULE_TPL = '(function(module) {\n' +
+	'try {\n' +
+	'  module = angular.module(\'%s\');\n' +
+	'} catch (e) {\n' +
+	'  module = angular.module(\'%s\', []);\n' +
+	'}\n' +
+	'module.run([\'$templateCache\', function($templateCache) {\n' +
+	'  $templateCache.put(\'%s\',\n    \'%s\');\n' +
+	'}]);\n' +
+	'})();\n';
 
 /**
  * Converts HTML files into Javascript files which contain an AngularJS module which automatically pre-loads the HTML
@@ -28,18 +28,18 @@ var SINGLE_MODULE_TPL = "(function(module) {\n" +
  * @param [options.prefix] - The prefix which should be added to the start of the url
  * @returns {stream}
  */
-module.exports = function(options){
-	"use strict";
+module.exports = function(options) {
+	'use strict';
 
-	function ngHtml2Js(file, callback){
-		if(file.isStream()){
-			return callback(new Error("gulp-ng-html2js: Streaming not supported"));
+	function ngHtml2Js(file, callback) {
+		if(file.isStream()) {
+			return callback(new Error('lingon-ng-html2js: Streaming not supported'));
 		}
 
-		if(file.isBuffer()){
+		if(file.isBuffer()) {
 			var filePath = getFileUrl(file, options);
 			file.contents = new Buffer(generateModuleDeclaration(filePath, String(file.contents), options));
-			file.path = gutil.replaceExtension(file.path, ".js");
+			file.path = gutil.replaceExtension(file.path, '.js');
 		}
 
 		return callback(null, file);
@@ -53,9 +53,9 @@ module.exports = function(options){
 	 * @param [options.moduleName] - The name of the module which will be generated. When omitted the fileUrl will be used.
 	 * @returns {string} - The generated Javascript code.
 	 */
-	function generateModuleDeclaration(fileUrl, contents, options){
+	function generateModuleDeclaration(fileUrl, contents, options) {
 		var escapedContent = escapeContent(contents);
-		if(options && options.moduleName){
+		if(options && options.moduleName) {
 			return util.format(SINGLE_MODULE_TPL, options.moduleName, options.moduleName, fileUrl, escapedContent);
 		}
 		else{
@@ -71,20 +71,20 @@ module.exports = function(options){
 	 * @param [options.prefix] - The prefix which should be added to the start of the url
 	 * @returns {string}
 	 */
-	function getFileUrl(file, options){
+	function getFileUrl(file, options) {
 		// Start with the relative file path
 		var base = (options && options.base) ? options.base : file.base;
 		var url = path.relative(base, file.path);
 
 		// Replace '\' with '/' (Windows)
-		url = url.replace(/\\/g, "/");
+		url = url.replace(/\\/g, '/');
 
 		// Remove the stripPrefix
-		if(options && options.stripPrefix && url.indexOf(options.stripPrefix) === 0){
-			url = url.replace(options.stripPrefix, "");
+		if(options && options.stripPrefix && url.indexOf(options.stripPrefix) === 0) {
+			url = url.replace(options.stripPrefix, '');
 		}
 		// Add the prefix
-		if(options && options.prefix){
+		if(options && options.prefix) {
 			url = options.prefix + url;
 		}
 
@@ -96,8 +96,8 @@ module.exports = function(options){
 	 * @param {string} content
 	 * @returns {string}
 	 */
-	function escapeContent(content){
-		return content.replace(/\\/g, "\\\\").replace(/'/g, "\\'").replace(/\r?\n/g, "\\n' +\n    '");
+	function escapeContent(content) {
+		return content.replace(/\\/g, '\\\\').replace(/'/g, '\\\'').replace(/\r?\n/g, '\\n\' +\n    \'');
 	}
 
 	return map(ngHtml2Js);
